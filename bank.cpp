@@ -13,28 +13,28 @@ This program will simulate a bank management system with the following features:
 
 using namespace std;
 
-//Functions for account management
-void createAccount();
-void displayAccount();
-void modifyAccount();
-void deleteAccount();
-void desposit(int);
-void withdraw(int);
-
 //Account class has class variables and functions
 class Account{
     private:
         int accountNumber;  //Randomized account number
         char nickname[50];  //Account nickname
-        int deposit;        //Initial deposit for account
+        int depositAmount;        //Initial deposit for account
         int accountType;    //Chequing or savings account
 
     public:
-        //Enter functions
+        //Functions for account management
+        void createAccount();
+        void displayAccount();
+        void modifyAccount();
+        void deleteAccount();
+        void deposit(int);
+        void withdraw(int);
 };
 
 int main(){
     char userAnswer; //User inputted menu option
+
+    Account userAccount;
 
     //Display bank banner and welcome message
     cout<<"\n******************************************************************"<<endl;
@@ -58,6 +58,7 @@ int main(){
 
         switch(userAnswer){
             case '1':
+                userAccount.createAccount();
                 break;
             case '2':
                 break;
@@ -89,28 +90,42 @@ int main(){
    Parameters: None
    createAccount will write and save details to an outfile: random account number, nickname, deposit, acc type
 */
-void createAccount(){
-    Account newAccount;
+void Account::createAccount(){
+    cout<<"Let's create a new account"<<endl;
     
+    //Generate randomized account number
+
+    cout<<"Please enter a nickname for you account: ";
+    cin>>nickname;
+    cin.ignore();
+    cin.getline(nickname, 50);
+
+    cout<<"Choose the account type (1 - Chequing 2 - Savings): ";
+    cin>>accountType;
+    cout<<endl;
+
+    cout<<"Deposit Amount (Minimum $25 - Chequing $100 - Savings): ";
+    cin>>depositAmount;
+    cout<<endl;
+    cout<<"Account Created Successfully!"<<endl;
+}
+
+void Account::displayAccount(){
 
 }
 
-void displayAccount(){
+void Account::modifyAccount(){
 
 }
 
-void modifyAccount(){
+void Account::deleteAccount(){
 
 }
 
-void deleteAccount(){
-
-}
-
-void deposit(int amount){
+void Account::deposit(int amount){
     //Change to value returning int?
 }
 
-void withdraw(int amount){
+void Account::withdraw(int amount){
     //Change to value returning int?
 }
