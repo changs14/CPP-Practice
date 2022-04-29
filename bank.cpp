@@ -17,9 +17,10 @@ using namespace std;
 class Account{
     private:
         int accountNumber;  //Randomized account number
-        char nickname[50];  //Account nickname
+        string nickname;  //Account nickname
         int depositAmount;        //Initial deposit for account
-        int accountType;    //Chequing or savings account
+        string accountType;    //Chequing or savings account
+        int accountAmount;
 
     public:
         //Functions for account management
@@ -29,10 +30,13 @@ class Account{
         void deleteAccount();
         void deposit(int);
         void withdraw(int);
+        void generateRandomAccountNumber();
 };
 
 int main(){
     char userAnswer; //User inputted menu option
+    int userWithdraw; //User inputted value to withdraw
+    int userDeposit; //User inputted value to deposit
 
     Account userAccount;
 
@@ -55,23 +59,33 @@ int main(){
         cout<<endl;
 
         cin>>userAnswer; //Get user input
+        cout<<endl;
 
         switch(userAnswer){
             case '1':
                 userAccount.createAccount();
                 break;
             case '2':
+                cout<<"Enter an amount to deposit: ";
+                cin>>userDeposit;
+                userAccount.deposit(userDeposit);
+                cout<<endl;
                 break;
             case '3':
+                cout<<"Enter an amount to withdraw: ";
+                cin>>userWithdraw;
+                userAccount.withdraw(userWithdraw);
+                cout<<endl;
                 break;
             case '4':
+                userAccount.displayAccount();
                 break;
             case '5':
                 break;
             case '6':
                 break;
             case '7':
-                cout<<"\nThank you for banking with Mr. Bean's Bank. Have a nice day!"<<endl;
+                cout<<"Thank you for banking with Mr. Bean's Bank. Have a nice day!"<<endl;
                 break;
             default:
                 cout<<"\nInvalid menu option. Please pick from 1-7\n"<<endl;
@@ -91,30 +105,74 @@ int main(){
    createAccount will write and save details to an outfile: random account number, nickname, deposit, acc type
 */
 void Account::createAccount(){
+    int accountChoice;
+
     cout<<"Let's create a new account"<<endl;
     
     //Generate randomized account number
 
     cout<<"Please enter a nickname for you account: ";
     cin>>nickname;
-    cin.ignore();
-    cin.getline(nickname, 50);
 
     cout<<"Choose the account type (1 - Chequing 2 - Savings): ";
-    cin>>accountType;
-    cout<<endl;
+    cin>>accountChoice;
+
+    if(accountChoice == 1){
+        accountType = "Chequing";
+    }
+    else{
+        accountType = "Savings";
+    }
 
     cout<<"Deposit Amount (Minimum $25 - Chequing $100 - Savings): ";
-    cin>>depositAmount;
+    cin>>accountAmount;
     cout<<endl;
+
+    generateRandomAccountNumber();
+
     cout<<"Account Created Successfully!"<<endl;
 }
 
 void Account::displayAccount(){
-
+    cout<<"Account Name: "<<nickname<<endl;
+    cout<<"Account Number: "<<accountNumber<<endl;
+    cout<<"Account Type: "<<accountType<<endl;
+    cout<<"Current Balance: $"<<accountAmount<<endl;
+    cout<<endl;
 }
 
 void Account::modifyAccount(){
+    char userOption;
+    int accountChoice;
+
+    do{
+        cout<<"What would you like to modify?"<<endl;
+        cout<<"1. Account Nickname"<<endl;
+        cout<<"2. Account Type"<<endl;
+        cout<<"3. Go Back"<<endl;
+    }while(userOption != '3');
+
+    switch(userOption){
+        case '1':
+            cout<<"New Nickname: ";
+            cin>>nickname;
+            break;
+        case '2':
+            cout<<"Account Type: ";
+            cin>>accountChoice;
+
+            if(accountChoice == 1){
+                accountType = "Chequing";
+            }
+            else{
+                accountType = "Savings";
+            }
+            break;
+        case '3':
+            break;
+        default:
+            cout<<"Invalid menu option"<<endl;
+    }
 
 }
 
@@ -123,9 +181,20 @@ void Account::deleteAccount(){
 }
 
 void Account::deposit(int amount){
-    //Change to value returning int?
+    accountAmount = accountAmount + amount;
 }
 
 void Account::withdraw(int amount){
-    //Change to value returning int?
+    //Check if current amount is zero
+    if(accountAmount <= 0){
+        cout<<"No funds can be withdrawn."<<endl;
+    }
+    else{
+        accountAmount = accountAmount - amount;
+    }
+}
+
+void Account::generateRandomAccountNumber(){
+    int random = 100000000 + (rand()%999999999);
+    accountNumber = random;
 }
