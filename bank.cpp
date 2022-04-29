@@ -63,37 +63,43 @@ int main(){
 
         switch(userAnswer){
             case '1':
+                //CREATE NEW ACCOUNT
                 userAccount.createAccount();
                 break;
             case '2':
+                //DEPOSIT
                 cout<<"Enter an amount to deposit: ";
                 cin>>userDeposit;
                 userAccount.deposit(userDeposit);
                 cout<<endl;
                 break;
             case '3':
+                //WITHDRAW
                 cout<<"Enter an amount to withdraw: ";
                 cin>>userWithdraw;
                 userAccount.withdraw(userWithdraw);
                 cout<<endl;
                 break;
             case '4':
+                //CHECK ACCOUNT DETAILS
                 userAccount.displayAccount();
                 break;
             case '5':
+                //MODIFY ACCOUNT
                 break;
             case '6':
+                //DELETE ACCOUNT
                 break;
-            case '7':
+            case '7':   
+                //EXIT
                 cout<<"Thank you for banking with Mr. Bean's Bank. Have a nice day!"<<endl;
                 break;
             default:
+                //Error message in user input
                 cout<<"\nInvalid menu option. Please pick from 1-7\n"<<endl;
         }
 
     }while(userAnswer!='7');
-
-
 
     return 0;
 }
@@ -102,21 +108,22 @@ int main(){
 
 /* Function: createAccount()
    Parameters: None
-   createAccount will write and save details to an outfile: random account number, nickname, deposit, acc type
+   Description: createAccount will write and save details to an outfile: random account number, nickname, deposit, acc type
 */
 void Account::createAccount(){
     int accountChoice;
 
     cout<<"Let's create a new account"<<endl;
     
-    //Generate randomized account number
-
+    //Get name for user account
     cout<<"Please enter a nickname for you account: ";
     cin>>nickname;
 
+    //Get user account type
     cout<<"Choose the account type (1 - Chequing 2 - Savings): ";
     cin>>accountChoice;
 
+    //Check user input. 1 - Chequing, 2- Savings
     if(accountChoice == 1){
         accountType = "Chequing";
     }
@@ -124,15 +131,22 @@ void Account::createAccount(){
         accountType = "Savings";
     }
 
+    //Get deposit amount and check if deposit amount is valid
     cout<<"Deposit Amount (Minimum $25 - Chequing $100 - Savings): ";
     cin>>accountAmount;
     cout<<endl;
 
+    //Generate a random number for the account number
     generateRandomAccountNumber();
 
     cout<<"Account Created Successfully!"<<endl;
 }
 
+/* Function: displayAccount()
+   Parameters: None
+   Description: This function will display all details of every account that has been created including:
+   Account name, number, type, and balance.
+*/
 void Account::displayAccount(){
     cout<<"Account Name: "<<nickname<<endl;
     cout<<"Account Number: "<<accountNumber<<endl;
@@ -141,6 +155,10 @@ void Account::displayAccount(){
     cout<<endl;
 }
 
+/* Function: modifyAccount()
+   Parameters: None
+   Description: This function will allow users to change either the nickname or type of account.
+*/
 void Account::modifyAccount(){
     char userOption;
     int accountChoice;
@@ -176,14 +194,29 @@ void Account::modifyAccount(){
 
 }
 
+/* Function: deleteAccount()
+   Parameters: None
+   Description: Allows user to delete an account
+*/
 void Account::deleteAccount(){
-
+    //Get confirmation that user wants to delete account for good.
+    cout<<"Do you really want to delete you account? Once deleted, no data can be retrieved."<<endl;
+    
+    //Cout yes or not etc etc.
 }
 
+/* Function: deposit()
+   Parameters: int amount - int variable of amount that user wants to deposit into their account
+   Description: This will add the user inputted deposit amount to the total account amount.
+*/
 void Account::deposit(int amount){
     accountAmount = accountAmount + amount;
 }
 
+/* Function: withdraw()
+   Parameters: int amount - int variable of amount that user wants to withdraw from their account
+   Description: This will subtract user inputted amount from the total account amount.
+*/
 void Account::withdraw(int amount){
     //Check if current amount is zero
     if(accountAmount <= 0){
@@ -194,6 +227,10 @@ void Account::withdraw(int amount){
     }
 }
 
+/* Function: generateRandomAccountNumber()
+   Parameters: None
+   Description: A random number generator between 100000000 - 999999999 to create an new account number.
+*/
 void Account::generateRandomAccountNumber(){
     int random = 100000000 + (rand()%999999999);
     accountNumber = random;
