@@ -27,14 +27,62 @@ After a customer has ordered an ice cream, the record of the order will be kept 
 
 using namespace std;
 
+void taiyaki_choice();
+
 
 int main(){
     string name;
+    int choice;
 
     cout<<"\t\t\t---------- Cosmo Ice -----------\n\n";
 	cout<<"Please Enter Your Name: ";
 	cin>>name;
 	cout<<"Hello "<<name<<"\n\nWhat would you like to order?\n\n";
 
+    cout<<"1. Ice cream"<<endl;
+    cout<<"2. Taiyaki\n"<<endl;
+
+    cout<<"Enter your choice: ";
+    cin>>choice;
+
+    switch(choice){
+        case 1:
+            cout<<"What style would you like your ice cream?"<<endl;
+            cout<<"1. Cone"<<endl;
+            cout<<"2. Upside down"<<endl;
+            cout<<"3. In a cup"<<endl;
+            break;
+
+        case 2:
+            taiyaki_choice();
+            break;
+
+        default:
+            cout<<"Invalid input"<<endl;
+    }
+
     return 0;
+}
+
+void taiyaki_choice(){
+    //Taiyaki selection
+
+    int num_taiyaki = 0;
+
+    cout<<"How many pieces of taiyaki would you like? (MAX 5)"<<endl;
+    cin>>num_taiyaki;
+
+    //Flavours: Mozarella, nutella, oreo, custard, redbean, taro
+    cout<<"\nTaiyaki Flavours:"<<endl;
+    cout<<"1. Mozarella\n2. Nutella\n3. Orea\n4. Custard\n5. Red Bean\n6. Taro"<<endl;
+
+    if(num_taiyaki > 6 || num_taiyaki <0){
+        cout<<"Invalid number of taiyakis."<<endl;
+    }
+
+    switch(num_taiyaki){
+        case 1:
+            break;
+    }
+
 }
