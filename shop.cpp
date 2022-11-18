@@ -24,10 +24,15 @@ After a customer has ordered an ice cream, the record of the order will be kept 
 
 
 #include <iostream>
+#include <string>
+#include <vector>
 
 using namespace std;
 
-void taiyaki_choice();
+void taiyakiChoice();
+void drinkChoice();
+void iceCreamChoice();
+
 
 
 int main(){
@@ -39,50 +44,83 @@ int main(){
 	cin>>name;
 	cout<<"Hello "<<name<<"\n\nWhat would you like to order?\n\n";
 
-    cout<<"1. Ice cream"<<endl;
-    cout<<"2. Taiyaki\n"<<endl;
+    do{
+        cout<<"1. Ice cream"<<endl;
+        cout<<"2. Taiyaki"<<endl;
+        cout<<"3. Drinks"<<endl;
+        cout<<"4. Finish Order"<<endl;
 
-    cout<<"Enter your choice: ";
-    cin>>choice;
+        cout<<"\nEnter your choice: ";
+        cin>>choice;
 
-    switch(choice){
-        case 1:
-            cout<<"What style would you like your ice cream?"<<endl;
-            cout<<"1. Cone"<<endl;
-            cout<<"2. Upside down"<<endl;
-            cout<<"3. In a cup"<<endl;
-            break;
+        switch(choice){
+            case 1:
+                iceCreamChoice();
+                break;
+            case 2:
+                taiyakiChoice();
+                break;
+            case 3:
+                drinkChoice();
+                break;
+            case 4:    
+                //End program
+                break;
+            default:
+                cout<<"Invalid input"<<endl;
+        }
 
-        case 2:
-            taiyaki_choice();
-            break;
-
-        default:
-            cout<<"Invalid input"<<endl;
-    }
+    }while(choice!=4);
 
     return 0;
 }
 
-void taiyaki_choice(){
+void taiyakiChoice(){
     //Taiyaki selection
 
     int num_taiyaki = 0;
+    int taiyaki_flavour;
+    string taiyaki[6] = {"Mozarella", "Nutella", "Oreo", "Custard", "Red Bean", "Taro"};
+    vector<string> customer_taiyaki;
 
     cout<<"How many pieces of taiyaki would you like? (MAX 5)"<<endl;
     cin>>num_taiyaki;
 
-    //Flavours: Mozarella, nutella, oreo, custard, redbean, taro
-    cout<<"\nTaiyaki Flavours:"<<endl;
-    cout<<"1. Mozarella\n2. Nutella\n3. Orea\n4. Custard\n5. Red Bean\n6. Taro"<<endl;
-
     if(num_taiyaki > 6 || num_taiyaki <0){
         cout<<"Invalid number of taiyakis."<<endl;
     }
+
+    //Flavours: Mozarella, nutella, oreo, custard, redbean, taro
+    cout<<"\nTaiyaki Flavours:"<<endl;
+    cout<<"1. Mozarella\n2. Nutella\n3. Oreo\n4. Custard\n5. Red Bean\n6. Taro"<<endl;
+    cout<<"Enter the number to choose the flavour:"<<endl;
+
+    for(int i=0; i<num_taiyaki; i++){
+        cin>> taiyaki_flavour;
+        customer_taiyaki.push_back(taiyaki[taiyaki_flavour-1]);
+        
+        //Check the input
+    }
+
+    for(int i=0; i<num_taiyaki; i++){
+        cout<<customer_taiyaki[i]<<" ";
+    }
+
+    cout<<endl;
+
 
     switch(num_taiyaki){
         case 1:
             break;
     }
 
+}
+
+//1.2. Flavour - Chocolate, vanilla, strawberry, matcha, mango, guava
+void iceCreamChoice(){
+
+}
+
+void drinkChoice(){
+     
 }
