@@ -26,11 +26,12 @@ After a customer has ordered an ice cream, the record of the order will be kept 
 #include <iostream>
 #include <string>
 #include <vector>
+#include <unordered_map>
 
 using namespace std;
 
-void taiyakiChoice();
-void drinkChoice();
+void taiyakiChoice(vector<string> &);
+void drinkChoice(vector<string> &);
 void iceCreamChoice();
 
 
@@ -38,6 +39,22 @@ void iceCreamChoice();
 int main(){
     string name;
     int choice;
+
+    //Holds the complete order
+    vector<vector<string>> taiyakiFinal;        //Final 2d vector containing all orders
+    vector<vector<string>> iceCreamFinal;       //Find 2d vector containing all orders
+
+    //Maybe use a map for ice cream to choose a style and flavour
+
+    //Orders
+    vector<string> taiyaki;     //Vector to hold a temp order of a taiyaki order
+    vector<string> iceCream;    //Vector to hold a temp order of ice cream
+    vector<string> drink;       
+
+    //Order counts
+    // int taiyakiCount = 0;
+    // int iceCreamCount = 0;
+    // int drinkCount = 0;
 
     cout<<"\t\t\t---------- Cosmo Ice -----------\n\n";
 	cout<<"Please Enter Your Name: ";
@@ -58,7 +75,9 @@ int main(){
                 iceCreamChoice();
                 break;
             case 2:
-                taiyakiChoice();
+                taiyakiChoice(taiyaki);
+                taiyakiFinal.push_back(taiyaki);
+                taiyaki.clear();
                 break;
             case 3:
                 drinkChoice();
@@ -72,16 +91,26 @@ int main(){
 
     }while(choice!=4);
 
+    cout<<"\nFinal order:"<<endl;
+
+    //Print out the final taiyaki order
+    for(int i=0; i<taiyakiFinal.size();i++){
+        for(int j = 0; j< taiyakiFinal[i].size(); j++){
+            cout<<taiyakiFinal[i][j]<<endl;
+        }
+    }
+
     return 0;
 }
 
-void taiyakiChoice(){
+/* taiyakiChoice(vector<string> &) - Function that gets a single taiyaki order from the user. 
+*/
+void taiyakiChoice(vector<string> &customer_taiyaki){
     //Taiyaki selection
 
     int num_taiyaki = 0;
     int taiyaki_flavour;
     string taiyaki[6] = {"Mozarella", "Nutella", "Oreo", "Custard", "Red Bean", "Taro"};
-    vector<string> customer_taiyaki;
 
     cout<<"How many pieces of taiyaki would you like? (MAX 5)"<<endl;
     cin>>num_taiyaki;
@@ -90,19 +119,19 @@ void taiyakiChoice(){
         cout<<"Invalid number of taiyakis."<<endl;
     }
 
-    //Flavours: Mozarella, nutella, oreo, custard, redbean, taro
+    //Flavours: Mozarella, nutella, oreo, custa rd, redbean, taro
     cout<<"\nTaiyaki Flavours:"<<endl;
     cout<<"1. Mozarella\n2. Nutella\n3. Oreo\n4. Custard\n5. Red Bean\n6. Taro"<<endl;
     cout<<"Enter the number to choose the flavour:"<<endl;
 
+    //Get user chosen flavours
     for(int i=0; i<num_taiyaki; i++){
         cin>> taiyaki_flavour;
         customer_taiyaki.push_back(taiyaki[taiyaki_flavour-1]);
-        
-        //Check the input
     }
 
-    cout<<"You chose " + num_taiyaki<<" pc taiyaki with fillings : ";
+    cout<<"You chose "<<num_taiyaki<<" pc taiyaki with fillings: ";
+
     for(int i=0; i<num_taiyaki; i++){
         cout<<customer_taiyaki[i]<<" ";
     }
@@ -116,6 +145,6 @@ void iceCreamChoice(){
 
 }
 
-void drinkChoice(){
+void drinkChoice(vector<string> & customer_drink){
      
 }
