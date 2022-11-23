@@ -102,7 +102,7 @@ void taiyakiChoice(){
         //Check the input
     }
 
-    cout<<"You chose " + num_taiyaki + " pc taiyaki with fillings : ";
+    cout<<"You chose " + num_taiyaki<<" pc taiyaki with fillings : ";
     for(int i=0; i<num_taiyaki; i++){
         cout<<customer_taiyaki[i]<<" ";
     }
