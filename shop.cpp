@@ -160,7 +160,106 @@ bool taiyakiChoice(vector<string> &customer_taiyaki){
 }
 
 //1.2. Flavour - Chocolate, vanilla, strawberry, matcha, mango, guava
+//1.1. Style - Cone, upside down, cup
+//1.3. Cone filling - Custard, red bean, nutella, taro, none
 bool iceCreamChoice(vector<string> & customer_ice_cream){
+    string iceCream;    //Full ice cream order
+
+    string style; //User chosen style
+    string styleChoice[3] = {"Cone", "Upside Down", "Cone"}; //List of available styles
+
+    string flavour; //User chosen flavour
+    string flavourChoice[6] = {"Chocolate", "Vanilla", "Strawberry", "Matcha", "Mango", "Guava"};
+
+    string filling; //User chosen filling
+    string fillingChoice[5] = {"Custard", "Red Bean", "Nutella", "Taro", "None"};
+
+    int choice = 0;
+
+    //Prompt the user for ice cream style
+    cout<<"Pick a style of ice cream:"<<endl;
+    cout<<"1. Cone\n2. Upside down\n3. Cup\n 4. Exit"<<endl;
+
+    cin>>choice;
+
+    // Exit ice cream menu
+    if(choice == 4){
+        return false;
+    }
+    
+    //Save user inputted choice
+    switch(choice){
+        case 1:
+            style = styleChoice[0];
+            break;
+        case 2:
+            style = styleChoice[1];
+            break;
+        case 3:
+            style = styleChoice[2];
+            break;
+        default:
+            cout<<"Invalid option."<<endl;
+            break;
+    }
+
+    //Prompt flavour
+    cout<<"Pick a flavour:"<<endl;
+    cout<<"1. Chocolate\n2. Vanilla\n3. Strawberry\n4. Matcha\n5.Mango\n6. Guava"<<endl;
+
+    cin>>choice;
+
+    switch(choice){
+        case 1:
+            flavour = flavourChoice[0];
+            break;
+        case 2:
+            flavour = flavourChoice[1];
+            break;
+        case 3:
+            flavour = flavourChoice[2];
+            break;
+        case 4:
+            flavour = flavourChoice[3];
+            break;
+        case 5:
+            flavour = flavourChoice[4];
+            break;
+        case 6:
+            flavour = flavourChoice[5];
+            break;
+        default:
+            cout<<"Invalid option."<<endl;
+            break;
+    }
+
+    //string fillingChoice[5] = {"Custard", "Red Bean", "Nutella", "Taro", "None"};
+    if(style != "Cone"){
+        cout<<"Pick a filling:"<<endl;
+        cout<<"1. Custard\n2. Red Bean\n3. Nutella\n4. Taro\n5. None"<<endl;
+        cin>>choice;
+    }
+
+    switch(choice){
+        case 1:
+            filling = fillingChoice[0];
+            break;
+        case 2:
+            filling = fillingChoice[1];
+            break;
+        case 3:
+            filling = fillingChoice[2];
+            break;
+        case 4:    
+            filling = fillingChoice[3];
+        case 5:
+            filling = "No";
+            break;
+        default:
+            cout<<"Invalid option."<<endl;
+    }
+
+    iceCream = style + " " + flavour + " with " + filling + "filling.";
 
     return true;
 
